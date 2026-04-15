@@ -1,0 +1,36 @@
+IF DATABASE_PRINCIPAL_ID('SinhVienRole')  IS NULL CREATE ROLE SinhVienRole;
+IF DATABASE_PRINCIPAL_ID('GiangVienRole') IS NULL CREATE ROLE GiangVienRole;
+IF DATABASE_PRINCIPAL_ID('QuanTriRole')   IS NULL CREATE ROLE QuanTriRole;
+GO
+
+-- SinhVienRole: tra cuu + thuc hien dang ky / huy mon
+GRANT SELECT ON MONHOC              TO SinhVienRole;
+GRANT SELECT ON LOPHOCPHAN          TO SinhVienRole;
+GRANT SELECT ON LICHHOC             TO SinhVienRole;
+GRANT SELECT ON DOTDANGKY           TO SinhVienRole;
+GRANT SELECT ON CTDT_MONHOC         TO SinhVienRole;
+GRANT SELECT ON CHUONGTRINH_DAOTAO  TO SinhVienRole;
+GRANT SELECT ON YEUCAU_TIENQUYET    TO SinhVienRole;
+GRANT SELECT ON V_BangDiem          TO SinhVienRole;
+GRANT SELECT ON V_TinChiTichLuy     TO SinhVienRole;
+GRANT SELECT ON V_GPA               TO SinhVienRole;
+GRANT SELECT ON HOCPHI              TO SinhVienRole;
+GRANT EXECUTE ON SP_DangKyTinChi    TO SinhVienRole;
+GRANT EXECUTE ON SP_HuyDangKy       TO SinhVienRole;
+GRANT EXECUTE ON SP_MonCoTheDangKy  TO SinhVienRole;
+GO
+
+-- GiangVienRole: xem danh sach lop + nhap / sua diem
+GRANT SELECT ON SINHVIEN            TO GiangVienRole;
+GRANT SELECT ON DANGKY              TO GiangVienRole;
+GRANT SELECT ON LOPHOCPHAN          TO GiangVienRole;
+GRANT SELECT ON LICHHOC             TO GiangVienRole;
+GRANT SELECT ON MONHOC              TO GiangVienRole;
+GRANT SELECT ON V_BangDiem          TO GiangVienRole;
+GRANT SELECT ON V_MonDongNhat       TO GiangVienRole;
+GRANT INSERT, UPDATE ON KETQUA_HOCTAP TO GiangVienRole;
+GO
+
+-- QuanTriRole: toan quyen tren database
+GRANT CONTROL ON DATABASE::QuanLyDangKyTinChi TO QuanTriRole;
+GO
